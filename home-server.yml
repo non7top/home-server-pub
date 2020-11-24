@@ -1,0 +1,14 @@
+- hosts: s2
+  become: 'yes'
+  roles:
+    # common roles
+    - { role: common/generic-ubuntu-server, become: true }
+    - { role: docker, become: true }
+#  tasks:
+#    - name: Install basic packages
+#      apt:
+#              name: mc
+#              state: present
+
+
+# vim:ft=ansible:

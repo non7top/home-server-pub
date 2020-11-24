@@ -1,0 +1,5 @@
+[s2]
+localhost
+
+[s2:vars]
+ansible_connection=local

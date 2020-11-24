@@ -1,0 +1,3 @@
+collections:
+  # community.general.docker_swarm
+  - name: community.general
