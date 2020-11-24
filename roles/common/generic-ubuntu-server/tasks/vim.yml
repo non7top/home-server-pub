@@ -1,0 +1,14 @@
+---
+
+- name: Install vim-nox
+  apt:
+    name:
+      - vim-nox
+    state: present
+
+- name: Remove stale vim
+  apt:
+    name:
+      - vim
+      - vim-tiny
+    state: absent

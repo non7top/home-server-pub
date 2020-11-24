@@ -1,0 +1,19 @@
+  - name: Collect all fs items inside dir {{ target_directory_path }}
+    find:
+      path: "{{ target_directory_path }}"
+      hidden: true
+      file_type: any
+    changed_when: false
+    register: collected_fsitems
+
+  - name: Remove all fs items inside dir {{ target_directory_path }}
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ collected_fsitems.files }}"
+    when: collected_fsitems.matched|int != 0
+
+  - name: Remove directory {{ target_directory_path }}
+    file:
+      path: "{{ target_directory_path }}"
+      state: absent

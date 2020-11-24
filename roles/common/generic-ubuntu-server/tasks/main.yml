@@ -1,0 +1,25 @@
+---
+
+  - name: Install packages
+    ansible.builtin.apt:
+      name:
+        - amd64-microcode
+        - intel-microcode
+        - dos2unix
+        - gdisk
+        - testdisk
+        - mc
+        - zip
+        - unzip
+        - p7zip-full
+        - p7zip-rar
+      state: present
+
+  - name: Purge snapd
+    include_tasks:
+      file: snapd.yml
+
+  - name: Install vim
+    include_tasks:
+      file: vim.yml
+

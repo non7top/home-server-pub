@@ -1,0 +1,16 @@
+---
+
+- name: Remove snapd package
+  apt: name=snapd state=absent purge=yes
+
+- name: Purge snapd directories
+  block:
+    - name: Remove snapd directories /var/lib/snapd
+      import_tasks: directory-purge.yml
+      vars:
+        target_directory_path: /var/lib/snapd
+
+    - name: Remove snapd directories /var/cache/snapd
+      import_tasks: directory-purge.yml
+      vars:
+        target_directory_path: /var/cache/snapd
