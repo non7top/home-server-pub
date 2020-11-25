@@ -1,9 +1,16 @@
 - hosts: s2
   become: 'yes'
+
+  vars:
+    #myapp_port_playbook: "{{ myapp_port | default(80) }}"
+    docker_compose_version: "1.27.4"
+
   roles:
     # common roles
     - { role: common/generic-ubuntu-server, become: true }
     - { role: docker, become: true }
+
+
 #  tasks:
 #    - name: Install basic packages
 #      apt:
