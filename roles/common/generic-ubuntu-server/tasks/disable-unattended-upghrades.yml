@@ -1,0 +1,26 @@
+# https://stackoverflow.com/questions/45269225/ansible-playbook-fails-to-lock-apt/51919678#51919678
+
+- name: Disable timers for unattended upgrade, so that none will be triggered by the `date -s` call.
+  systemd:
+    name: "{{ item }}"
+    enabled: no
+    masked: yes
+    daemon_reload: yes
+  loop: [ 'apt-daily.timer', 'apt-daily-upgrade.timer' ]
+
+#- name: Wait for any possibly running unattended upgrade to finish
+#  raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
+
+- name: Purge unattended upgrades
+  apt:
+    name:
+      - unattended-upgrades
+    state: absent
+    purge: yes
+
+# not sure, leaving it for safety
+- name: If needed, install Python
+  apt:
+    name:
+      - python3
+    state: present

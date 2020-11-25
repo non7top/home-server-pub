@@ -1,6 +1,6 @@
 ---
 
-  - name: Install packages
+  - name: Common | Install packages
     ansible.builtin.apt:
       name:
         - amd64-microcode
@@ -15,11 +15,15 @@
         - p7zip-rar
       state: present
 
-  - name: Purge snapd
+  - name: Common | Disable unattended upgrades
+    include_tasks:
+      file: disable-unattended-upghrades.yml
+
+  - name: Common | Purge snapd
     include_tasks:
       file: snapd.yml
 
-  - name: Install vim
+  - name: Common | Install vim
     include_tasks:
       file: vim.yml
 
