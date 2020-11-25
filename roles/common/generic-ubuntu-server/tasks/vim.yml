@@ -1,12 +1,12 @@
 ---
 
-- name: Install vim-nox
+- name: VIM | Install vim-nox
   apt:
     name:
       - vim-nox
     state: present
 
-- name: Remove stale vim
+- name: VIM | Remove stale vim
   apt:
     name:
       - vim
